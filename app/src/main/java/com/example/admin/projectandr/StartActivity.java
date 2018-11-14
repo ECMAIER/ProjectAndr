@@ -18,6 +18,8 @@ public class StartActivity extends AppCompatActivity
     private Button Game;
     private Button Coop;
     private Button Time;
+    //Evan Edit
+    private Button Calculator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,7 @@ public class StartActivity extends AppCompatActivity
         Button Game = findViewById(R.id.Game);
         Button Coop = findViewById(R.id.COOP);
         Button Time = findViewById(R.id.time);
+        Button Calculator = findViewById(R.id.calculator);
 
         Game.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +56,15 @@ public class StartActivity extends AppCompatActivity
                 startActivity(intent3);
             }
         });
+
+        Calculator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent4 = new Intent(StartActivity.this, CalculatorActivity.class);
+                startActivity(intent4);
+            }
+        });
+
     }
 }
 

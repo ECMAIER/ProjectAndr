@@ -24,6 +24,7 @@
         <activity android:name=".TimedActivity" />
         <activity android:name=".StatsActivity" />
         <activity android:name=".TutorialActivity" />
+        <activity android:name=".CalculatorActivity"/>
         <activity android:name=".GameActivity"></activity>
     </application>
 

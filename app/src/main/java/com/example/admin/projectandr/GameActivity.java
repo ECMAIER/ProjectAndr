@@ -35,10 +35,9 @@ public class GameActivity extends AppCompatActivity {
         return digit;
     }
 
-    private Button calculateButton;
-    private TextView resultText;
-    private EditText numberInBase;
-    private EditText base;
+    private Button genQuestionButton;
+    private TextView inNumberTextView;
+
 
 
     @Override
@@ -46,30 +45,27 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        resultText = findViewById(R.id.result);
-        calculateButton = findViewById(R.id.calculate_button);
-        numberInBase = findViewById(R.id.number_in_base);
-        base = findViewById(R.id.number_in_base);
+        //hard coded conversion values, later these will be brought in by an intent from
+        //the mode select view.  They may later be arrays so that users can practice different
+        //conversions in the same game
+        int from_base = 10;
+        int to_base = 2;
 
-        calculateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String inNumber = numberInBase.getText().toString();
-                String inBaseStr = base.getText().toString();
+        String str1;
+        String str2;
+        if (from_base == 10)
+            str1 = "Decimal";
+        else
+            str1 = Integer.toString(from_base);
 
-                int inBaseNum = Integer.parseInt(inBaseStr);
+        if (to_base == 2)
+            str2 = "Binary";
+        else
+            str2 = Integer.toString(to_base);
 
-                int output = fromDigits(inNumber,inBaseNum);
+        String generateQuestionString = str1 + "->" + str2;
 
-
-
-                GameActivity.this.resultText.setText(Integer.toString(output));
-
-            }
-        });
-
-
-
+        GameActivity.this.genQuestionButton.setText(generateQuestionString);
 
     }
 }
