@@ -5,15 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CoopActivity">
+    tools:context=".QuizActivty">
 
     <TextView
-        android:id="@+id/tutorial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="102dp"
-        android:text="This is the coop activity" />
+        android:text="This is the quiz activity"/>
 
 </RelativeLayout>
