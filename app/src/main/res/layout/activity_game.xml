@@ -14,7 +14,6 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="50dp"
         android:layout_marginTop="150dp"
-        android:onClick="left_checkbox"
         android:text="@string/conversion_button_decimal" />
 
     <CheckBox
@@ -25,7 +24,6 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="150dp"
         android:layout_marginEnd="50dp"
-        android:onClick="right_checkbox"
         android:text="@string/conversion_button_decimal" />
 
     <CheckBox
@@ -36,7 +34,6 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="50dp"
         android:layout_marginTop="200dp"
-        android:onClick="left_checkbox"
         android:text="@string/conversion_button_binary" />
 
     <CheckBox
@@ -47,7 +44,6 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="200dp"
         android:layout_marginEnd="50dp"
-        android:onClick="right_checkbox"
         android:text="@string/conversion_button_binary" />
 
     <CheckBox
@@ -58,7 +54,6 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="50dp"
         android:layout_marginTop="250dp"
-        android:onClick="left_checkbox"
         android:text="@string/conversion_button_hex" />
 
     <CheckBox
@@ -69,7 +64,6 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="250dp"
         android:layout_marginEnd="50dp"
-        android:onClick="right_checkbox"
         android:text="@string/conversion_button_hex" />
 
     <Button

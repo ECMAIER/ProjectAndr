@@ -9,11 +9,16 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Vector;
+
 
 public class GameActivity extends AppCompatActivity {
 
     CheckBox left_binary, left_decimal, left_hex, right_binary, right_decimal, right_hex;
     Button enter;
+    ArrayList<Integer> left = new ArrayList<Integer>(0);
+    ArrayList<Integer> right = new ArrayList<Integer>(0);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,58 +38,43 @@ public class GameActivity extends AppCompatActivity {
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GameActivity.this, QuizActivty.class);
-                startActivity(intent);
-            }
-        });
 
-        left_binary.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (left_binary.isChecked()) {
-                    Toast.makeText(getApplicationContext(), "checked", Toast.LENGTH_LONG).show();
+                if (left_decimal.isChecked()){
+                    left.add(10);
+                }
+
+                if (left_binary.isChecked()){
+                    left.add(2);
+                }
+
+                if (left_hex.isChecked()){
+                    left.add(16);
+                }
+
+                if (right_decimal.isChecked()){
+                    right.add(10);
+                }
+
+                if (right_binary.isChecked()){
+                    right.add(2);
+                }
+
+                if (right_hex.isChecked()){
+                    right.add(16);
+                }
+
+                if (left.size() == 0 || right.size() == 0){
+                    enter.setError("Must select at least one from each side");
+                }else {
+                    Intent intent = new Intent(GameActivity.this, QuizActivity.class);
+
+
+                    intent.putIntegerArrayListExtra("left_values", left);
+                    intent.putIntegerArrayListExtra("right_values", right);
+
+                    startActivity(intent);
                 }
             }
         });
-
-        left_decimal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if( left_decimal.isChecked()){
-                    Toast.makeText(getApplicationContext(), "checked",Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
-        left_hex.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(left_hex.isChecked()){
-                    Toast.makeText(getApplicationContext(), "checked", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
     }
-
-    //public void addListenerOnButtonClick(){
-
-        //Get instances of CheckBoxes and the button from activity_game.xml
-        //left_binary = (CheckBox) findViewById(R.id.left_binary);
-        //left_decimal = (CheckBox) findViewById(R.id.left_decimal);
-        //left_hex = (CheckBox) findViewById(R.id.left_hex);
-        //right_binary = (CheckBox) findViewById(R.id.right_binary);
-        //right_decimal = (CheckBox) findViewById(R.id.right_decimal);
-        //right_hex = (CheckBox) findViewById(R.id.right_hex);
-
-        //enter = (Button) findViewById(R.id.enter_button);
-
-        //enter.setOnClickListener(new View.OnClickListener() {
-           // @Override
-            //public void onClick(View v) {
-              //  Intent intent = new Intent(GameActivity.this, QuizActivity.class);
-                //startActivity(intent);
-          //  }
-      //  });
-    //}
 }

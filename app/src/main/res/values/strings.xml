@@ -17,4 +17,5 @@
     <string name="conversion_button_binary">Binary</string>
     <string name="conversion_button_hex">Hexadecimal</string>
     <string name="conversion_button_enter">Enter</string>
+    <string name="calc_view_button">Calculator</string>
 </resources>
