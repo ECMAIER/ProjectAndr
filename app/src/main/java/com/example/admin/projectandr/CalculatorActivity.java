@@ -54,13 +54,29 @@ public class CalculatorActivity extends AppCompatActivity{
             public void onClick(View view) {
                 //collect input from text views
                 String inNumber = numberInBase.getText().toString();
-                int inBase = Integer.parseInt(base.getText().toString());
+                String inBaseString = base.getText().toString();
 
-                //convert to base 10
-                int output = fromDigits(inNumber, inBase);
+                if (inNumber.length() < 1){
+                    numberInBase.setError("Must input number");
+                }
 
-                //display result
-                CalculatorActivity.this.resultText.setText(Integer.toString(output));
+                if (inBaseString.length() < 1){
+                    base.setError("Must input base");
+
+                }
+
+                if (inBaseString.length() > 0){
+                    int inBase = Integer.parseInt(base.getText().toString());
+
+
+                    //convert to base 10
+                    int output = fromDigits(inNumber, inBase);
+
+                    //display result
+                    CalculatorActivity.this.resultText.setText(Integer.toString(output));
+                }
+
+
             }
         });
 

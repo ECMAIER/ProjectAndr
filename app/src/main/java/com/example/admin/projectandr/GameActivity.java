@@ -35,8 +35,6 @@ public class GameActivity extends AppCompatActivity {
 
             //
             digit += (int) (temp *  Math.pow(base,S.length()-i-1));
-
-
         }
         return digit;
     }
@@ -95,6 +93,7 @@ public class GameActivity extends AppCompatActivity {
 
 
     private Button genQuestionButton;
+    private TextView scoreView;
     private TextView inNumberTextView;
     private Button answerOne;
     private Button answerTwo;
@@ -112,6 +111,13 @@ public class GameActivity extends AppCompatActivity {
     int from_base;
     int to_base;
 
+    int score = 0;
+    String scoreString = "Score: " + Integer.toString(score);
+
+    boolean answerSelected = false;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,6 +130,7 @@ public class GameActivity extends AppCompatActivity {
         to_base = 2;
 
         genQuestionButton = findViewById(R.id.generate_question_button);
+        scoreView = findViewById(R.id.score_text_view);
         inNumberTextView = findViewById(R.id.toConvert);
         answerOne = findViewById(R.id.answerOne);
         answerTwo = findViewById(R.id.answerTwo);
@@ -148,10 +155,10 @@ public class GameActivity extends AppCompatActivity {
         GameActivity.this.genQuestionButton.setText(generateQuestionString);
 
         //setup the number that the user is asked to convert
-       String correctAnswerString = Integer.toString(correctAnswer);
+       String correctAnswerString = "Convert: " + Integer.toString(correctAnswer);
        GameActivity.this.inNumberTextView.setText(correctAnswerString);
 
-
+       GameActivity.this.scoreView.setText(scoreString);
 
         while (wrongAnswerTwo == wrongAnswerOne || wrongAnswerTwo == correctAnswer)
             wrongAnswerTwo = correctAnswer + generateOffset(correctAnswer);
@@ -190,18 +197,24 @@ public class GameActivity extends AppCompatActivity {
 
        answerOne.setOnClickListener(new View.OnClickListener() {
            @Override
-           public void onClick(View view){
-               if (correctButtonNum == 1){
-                   //not sure how to use the resource color?
-                   GameActivity.this.answerOne.setBackgroundColor(Color.GREEN);
-               } else {
-                   GameActivity.this.answerOne.setBackgroundColor(Color.RED);
-                   if (correctButtonNum == 2)
-                       GameActivity.this.answerTwo.setBackgroundColor(Color.GREEN);
-                   else if (correctButtonNum == 3)
-                       GameActivity.this.answerThree.setBackgroundColor(Color.GREEN);
-                   else if (correctButtonNum == 4)
-                       GameActivity.this.answerFour.setBackgroundColor(Color.GREEN);
+           public void onClick(View view) {
+               if (!answerSelected) {
+                   answerSelected= true;
+                   if (correctButtonNum == 1) {
+                       //not sure how to use the resource color?
+                       GameActivity.this.answerOne.setBackgroundColor(Color.GREEN);
+                       score++;
+                       scoreString = "Score: " + Integer.toString(score);
+                       GameActivity.this.scoreView.setText(scoreString);
+                   } else {
+                       GameActivity.this.answerOne.setBackgroundColor(Color.RED);
+                       if (correctButtonNum == 2)
+                           GameActivity.this.answerTwo.setBackgroundColor(Color.GREEN);
+                       else if (correctButtonNum == 3)
+                           GameActivity.this.answerThree.setBackgroundColor(Color.GREEN);
+                       else if (correctButtonNum == 4)
+                           GameActivity.this.answerFour.setBackgroundColor(Color.GREEN);
+                   }
                }
            }
 
@@ -209,37 +222,49 @@ public class GameActivity extends AppCompatActivity {
 
         answerTwo.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-                if (correctButtonNum == 2){
-                    //not sure how to use the resource color?
-                    GameActivity.this.answerTwo.setBackgroundColor(Color.GREEN);
-                } else {
-                    GameActivity.this.answerTwo.setBackgroundColor(Color.RED);
-                    if (correctButtonNum == 1)
-                        GameActivity.this.answerOne.setBackgroundColor(Color.GREEN);
-                    else if (correctButtonNum == 3)
-                        GameActivity.this.answerThree.setBackgroundColor(Color.GREEN);
-                    else if (correctButtonNum== 4)
-                        GameActivity.this.answerFour.setBackgroundColor(Color.GREEN);
+            public void onClick(View view) {
+                if (!answerSelected) {
+                    answerSelected = true;
+                    if (correctButtonNum == 2) {
+                        //not sure how to use the resource color?
+                        GameActivity.this.answerTwo.setBackgroundColor(Color.GREEN);
+                        score++;
+                        scoreString = "Score: " + Integer.toString(score);
+                        GameActivity.this.scoreView.setText(scoreString);
+                    } else {
+                        GameActivity.this.answerTwo.setBackgroundColor(Color.RED);
+                        if (correctButtonNum == 1)
+                            GameActivity.this.answerOne.setBackgroundColor(Color.GREEN);
+                        else if (correctButtonNum == 3)
+                            GameActivity.this.answerThree.setBackgroundColor(Color.GREEN);
+                        else if (correctButtonNum == 4)
+                            GameActivity.this.answerFour.setBackgroundColor(Color.GREEN);
+                    }
                 }
             }
-
         });
+
 
         answerThree.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-                if (correctButtonNum == 3){
-                    //not sure how to use the resource color?
-                    GameActivity.this.answerThree.setBackgroundColor(Color.GREEN);
-                } else {
-                    GameActivity.this.answerThree.setBackgroundColor(Color.RED);
-                    if (correctButtonNum == 1)
-                        GameActivity.this.answerOne.setBackgroundColor(Color.GREEN);
-                    else if (correctButtonNum == 2)
-                        GameActivity.this.answerTwo.setBackgroundColor(Color.GREEN);
-                    else if (correctButtonNum== 4)
-                        GameActivity.this.answerFour.setBackgroundColor(Color.GREEN);
+            public void onClick(View view) {
+                if (!answerSelected) {
+                    answerSelected = true;
+                    if (correctButtonNum == 3) {
+                        //not sure how to use the resource color?
+                        GameActivity.this.answerThree.setBackgroundColor(Color.GREEN);
+                        score++;
+                        scoreString = "Score: " + Integer.toString(score);
+                        GameActivity.this.scoreView.setText(scoreString);
+                    } else {
+                        GameActivity.this.answerThree.setBackgroundColor(Color.RED);
+                        if (correctButtonNum == 1)
+                            GameActivity.this.answerOne.setBackgroundColor(Color.GREEN);
+                        else if (correctButtonNum == 2)
+                            GameActivity.this.answerTwo.setBackgroundColor(Color.GREEN);
+                        else if (correctButtonNum == 4)
+                            GameActivity.this.answerFour.setBackgroundColor(Color.GREEN);
+                    }
                 }
             }
 
@@ -247,18 +272,24 @@ public class GameActivity extends AppCompatActivity {
 
         answerFour.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-                if (correctButtonNum== 4){
-                    //not sure how to use the resource color?
-                    GameActivity.this.answerFour.setBackgroundColor(Color.GREEN);
-                } else {
-                    GameActivity.this.answerFour.setBackgroundColor(Color.RED);
-                    if (correctButtonNum == 1)
-                        GameActivity.this.answerOne.setBackgroundColor(Color.GREEN);
-                    else if (correctButtonNum == 2)
-                        GameActivity.this.answerTwo.setBackgroundColor(Color.GREEN);
-                    else if (correctButtonNum== 3)
-                        GameActivity.this.answerThree.setBackgroundColor(Color.GREEN);
+            public void onClick(View view) {
+                if (!answerSelected) {
+                    answerSelected = true;
+                    if (correctButtonNum == 4) {
+                        //not sure how to use the resource color?
+                        GameActivity.this.answerFour.setBackgroundColor(Color.GREEN);
+                        score++;
+                        scoreString = "Score: " + Integer.toString(score);
+                        GameActivity.this.scoreView.setText(scoreString);
+                    } else {
+                        GameActivity.this.answerFour.setBackgroundColor(Color.RED);
+                        if (correctButtonNum == 1)
+                            GameActivity.this.answerOne.setBackgroundColor(Color.GREEN);
+                        else if (correctButtonNum == 2)
+                            GameActivity.this.answerTwo.setBackgroundColor(Color.GREEN);
+                        else if (correctButtonNum == 3)
+                            GameActivity.this.answerThree.setBackgroundColor(Color.GREEN);
+                    }
                 }
             }
 
@@ -267,8 +298,9 @@ public class GameActivity extends AppCompatActivity {
         genQuestionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                correctAnswer = ThreadLocalRandom.current().nextInt(0, 10);
-                String correctAnswerString = Integer.toString(correctAnswer);
+                answerSelected = false;
+                correctAnswer = ThreadLocalRandom.current().nextInt(2, 10);
+                String correctAnswerString = "Convert: " + Integer.toString(correctAnswer);
                 GameActivity.this.inNumberTextView.setText(correctAnswerString);
 
                 correctButtonNum = ThreadLocalRandom.current().nextInt(1,4);
@@ -317,11 +349,5 @@ public class GameActivity extends AppCompatActivity {
                 answerFour.setBackgroundColor(Color.LTGRAY);
             }
         });
-
-
-
-
-
-
     }
 }
