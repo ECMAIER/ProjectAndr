@@ -14,6 +14,13 @@
     <string name="Coop_button">Coop Game</string>
     <string name="title_activity_game">GameActivity</string>
 
+    <string name="conversion_button_decimal">Decimal</string>
+    <string name="conversion_button_binary">Binary</string>
+    <string name="conversion_button_hex">Hexadecimal</string>
+    <string name="conversion_button_enter">Enter</string>
+    <string name="calc_view_button">Calculator</string>
+
+
     <string name="total_time_played">Total Time Played:</string>
 
     <string name="quiz">Quiz</string>
@@ -27,8 +34,6 @@
     <string name="score">Score:</string>
     <string name="survivor">Survivor</string>
     <string name="total_time_played_string_playtime">Total Time Played: @string/playtime</string>
-
-
 
 
 </resources>
