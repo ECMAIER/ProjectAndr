@@ -16,4 +16,14 @@
         android:layout_marginTop="87dp"
         android:text="This is the timed game activity" />
 
+
+    <TextView
+        android:id="@+id/txtSecond"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:ems="10" />
+
+
 </RelativeLayout>
