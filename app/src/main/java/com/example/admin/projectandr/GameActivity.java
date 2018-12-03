@@ -85,19 +85,14 @@ public class GameActivity extends AppCompatActivity {
                 }else {
                     Intent intent = new Intent(GameActivity.this, QuizActivity.class);
 
-
                     intent.putIntegerArrayListExtra("left_values", left);
                     intent.putIntegerArrayListExtra("right_values", right);
 
-        Button Mode = findViewById(R.id.Mode);
-
-        /*Mode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(StartActivity.this, ModeActivity.class);
-                startActivity(intent);
+                    startActivity(intent);
+                }
             }
-        });*/
+        });
+
     }
 
     @Override
@@ -109,18 +104,11 @@ public class GameActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop()
-    {
+    protected void onStop() {
         super.onStop();
-        end = (int)(start - SystemClock.currentThreadTimeMillis());
-        editor.putInt(getString(R.string.total_time_played), end + sharedPref.getInt(getString(R.string.total_time_played ) ,0));
+        end = (int) (start - SystemClock.currentThreadTimeMillis());
+        editor.putInt(getString(R.string.total_time_played), end + sharedPref.getInt(getString(R.string.total_time_played), 0));
         editor.apply();
-
-
-                    startActivity(intent);
-                }
-            }
-        });
     }
 }
 
