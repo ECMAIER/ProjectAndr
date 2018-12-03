@@ -13,16 +13,13 @@ public class StatsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
-
-        //DOES NOT PRINT SET.TEXT
-        totalplaytime = findViewById(R.id.totalplaytime);
-        totalplaytime.setText("3");//String.valueOf(sharedPref.getInt(getString(R.string.total_time_played) ,0)));
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        setContentView(R.layout.activity_stats);
+        totalplaytime = findViewById(R.id.totalplaytime);
+        totalplaytime.setText(String.valueOf(sharedPref.getInt(getString(R.string.total_time_played) ,0)/60000) + " min");
 
 
     }

@@ -28,11 +28,12 @@ public class GameActivity extends AppCompatActivity {
     Button enter;
     ArrayList<Integer> left = new ArrayList<Integer>(0);
     ArrayList<Integer> right = new ArrayList<Integer>(0);
+
     SharedPreferences sharedPref = MainActivity.sharedPref;
     SharedPreferences.Editor editor = sharedPref.edit();
 
-    long start = 0;
-    int end = 0;
+    float start = 0;
+    float end = 0;
     private Button Mode;
 
 
@@ -99,15 +100,17 @@ public class GameActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         setContentView(R.layout.activity_timed);
-        start = SystemClock.currentThreadTimeMillis();
+        start = System.currentTimeMillis();
 
     }
-
+//2.1845334
     @Override
     protected void onStop() {
         super.onStop();
-        end = (int) (start - SystemClock.currentThreadTimeMillis());
-        editor.putInt(getString(R.string.total_time_played), end + sharedPref.getInt(getString(R.string.total_time_played), 0));
+        end = System.currentTimeMillis() - start;
+        int playtime = (int)(end + sharedPref.getInt(getString(R.string.total_time_played),0));
+        editor.putInt(getString(R.string.total_time_played), playtime );
+        //editor.putInt(getString(R.string.total_time_played), 0 ); //to reset
         editor.apply();
     }
 }

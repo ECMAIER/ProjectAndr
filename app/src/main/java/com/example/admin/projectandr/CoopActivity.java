@@ -8,28 +8,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class CoopActivity extends AppCompatActivity {
+
     SharedPreferences sharedPref = MainActivity.sharedPref;
     SharedPreferences.Editor editor = sharedPref.edit();
-    long start = 0;
-    int end = 0;
+    float start = 0;
+    float end = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coop);
     }
+
     @Override
     protected void onStart(){
         super.onStart();
-        start = SystemClock.currentThreadTimeMillis();
+        start = System.currentTimeMillis();
 
     }
     @Override
     protected void onStop()
     {
         super.onStop();
-        end = (int)(start - SystemClock.currentThreadTimeMillis());
-        editor.putInt(getString(R.string.total_time_played), end + sharedPref.getInt(getString(R.string.total_time_played ) ,0));
+        end = System.currentTimeMillis() - start;
+        int playtime = (int)(end + sharedPref.getInt(getString(R.string.total_time_played),0));
+        editor.putInt(getString(R.string.total_time_played), playtime );
         editor.apply();
     }
 }

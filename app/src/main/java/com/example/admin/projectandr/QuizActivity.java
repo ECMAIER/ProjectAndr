@@ -1,6 +1,7 @@
 package com.example.admin.projectandr;
 
 //Game activity ... blank text view, update as needed
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,10 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class QuizActivity extends AppCompatActivity {
 
+    SharedPreferences sharedPref = MainActivity.sharedPref;
+    SharedPreferences.Editor editor = sharedPref.edit();
+    float start = 0;
+    float end = 0;
 
     //This function takes in a string representing a number in any base,
     //it converts the number to a (base 10) integer
@@ -116,6 +121,12 @@ public class QuizActivity extends AppCompatActivity {
 
     boolean answerSelected = false;
 
+    @Override
+    protected void onStart(){
+        super.onStart();
+        start = System.currentTimeMillis();
+
+    }
 
 
     @Override
@@ -349,5 +360,14 @@ public class QuizActivity extends AppCompatActivity {
                 answerFour.setBackgroundColor(Color.LTGRAY);
             }
         });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        end = System.currentTimeMillis() - start;
+        int playtime = (int)(end + sharedPref.getFloat(getString(R.string.total_time_played),0));
+        editor.putInt(getString(R.string.total_time_played), playtime );
+        editor.apply();
     }
 }
