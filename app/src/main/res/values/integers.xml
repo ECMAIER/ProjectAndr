@@ -1,2 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+
+<resources>
+
+    <integer name="totalplaytime">0</integer>
+
+    <integer name="quizaccuracy">0</integer>
+
+    <integer name="endlessstreak">0</integer>
+
+    <integer name="timedbestgamescore">0</integer>
+    <integer name="timedbestgametime">0</integer>
+    <integer name="timedfastestbestscore">0</integer>
+    <integer name="timedfastestbesttime">0</integer>
+
+    <integer name="survivorlongeststreak">0</integer>
+</resources>
