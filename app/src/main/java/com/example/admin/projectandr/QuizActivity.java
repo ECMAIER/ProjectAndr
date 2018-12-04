@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.content.Intent;
+
+import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 
@@ -51,13 +54,15 @@ public class QuizActivity extends AppCompatActivity {
     //need to screen base for numbers greater than zero
     public static String BaseToDigit(int inNumber, int base){
 
+        int tempNumber = inNumber;
+
         String baseRepresentation = "";
         char newChar;
         int newDigit;
 
-        while(inNumber > 0){
+        while(tempNumber > 0){
 
-            newDigit = inNumber % base;
+            newDigit = tempNumber % base;
 
             //for digits zero through nine, add ascii 48 (zero)
             if (newDigit< 10)
@@ -68,7 +73,7 @@ public class QuizActivity extends AppCompatActivity {
 
             baseRepresentation =  newChar + baseRepresentation;
 
-            inNumber = inNumber / base;
+            tempNumber = tempNumber / base;
         }
 
         return baseRepresentation;
@@ -96,80 +101,48 @@ public class QuizActivity extends AppCompatActivity {
         return offset;
     }
 
+    //this function sets up a new question and populates the buttons
+    public void generateQuestion(ArrayList<Integer> from_bases, ArrayList<Integer> to_bases){
 
-    private Button genQuestionButton;
-    private TextView scoreView;
-    private TextView inNumberTextView;
-    private Button answerOne;
-    private Button answerTwo;
-    private Button answerThree;
-    private Button answerFour;
+        correctButtonNum = ThreadLocalRandom.current().nextInt(1,4);
+        int correctAnswer = ThreadLocalRandom.current().nextInt(2, 16);
 
+        String str1 = "";
+        String str2 = "";
 
-    int correctButtonNum = ThreadLocalRandom.current().nextInt(1,4);
-    int correctAnswer = ThreadLocalRandom.current().nextInt(1, 10);
+        int rand;
 
-    int wrongAnswerOne = correctAnswer + generateOffset(correctAnswer);
-    int wrongAnswerTwo = correctAnswer + generateOffset(correctAnswer);
-    int wrongAnswerThree = correctAnswer + generateOffset(correctAnswer);
+        rand = ThreadLocalRandom.current().nextInt(0, from_bases.size() -1 );
+        from_base= from_bases.get(rand);
 
-    int from_base;
-    int to_base;
+        rand = ThreadLocalRandom.current().nextInt(0, to_bases.size() - 1);
+        to_base = to_bases.get(rand);
 
-    int score = 0;
-    String scoreString = "Score: " + Integer.toString(score);
+        //brute force make sure baseFrom and baseTo not equal, this is not a good implementation, but it works
+        while(from_base == to_base){
+            rand = ThreadLocalRandom.current().nextInt(0, to_bases.size());
+            to_base = to_bases.get(rand);
+        }
 
-    boolean answerSelected = false;
-
-    @Override
-    protected void onStart(){
-        super.onStart();
-        start = System.currentTimeMillis();
-
-    }
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quiz);
-
-        //hard coded conversion values, later these will be brought in by an intent from
-        //the mode select view.  They may later be arrays so that users can practice different
-        //conversions in the same game
-        from_base = 10;
-        to_base = 2;
-
-        genQuestionButton = findViewById(R.id.generate_question_button);
-        scoreView = findViewById(R.id.score_text_view);
-        inNumberTextView = findViewById(R.id.toConvert);
-        answerOne = findViewById(R.id.answerOne);
-        answerTwo = findViewById(R.id.answerTwo);
-        answerThree = findViewById(R.id.answerThree);
-        answerFour = findViewById(R.id.answerFour);
-
-
-        String str1;
-        String str2;
+        if (from_base == 2)
+            str1 = "Binary";
         if (from_base == 10)
             str1 = "Decimal";
-        else
-            str1 = Integer.toString(from_base);
-
+        if (from_base == 16)
+            str1 = "Hexadecimal";
         if (to_base == 2)
             str2 = "Binary";
-        else
-            str2 = Integer.toString(to_base);
+        if (to_base == 10)
+            str2 = "Decimal";
+        if (to_base == 16)
+            str2 = "Hexadecimal";
 
         String generateQuestionString = str1 + "->" + str2;
-
         QuizActivity.this.genQuestionButton.setText(generateQuestionString);
 
-        //setup the number that the user is asked to convert
-        String correctAnswerString = "Convert: " + Integer.toString(correctAnswer);
-        QuizActivity.this.inNumberTextView.setText(correctAnswerString);
 
-        QuizActivity.this.scoreView.setText(scoreString);
+        correctAnswerString = "Convert: " + BaseToDigit(correctAnswer, from_base);
+        QuizActivity.this.inNumberTextView.setText(correctAnswerString);
 
         while (wrongAnswerTwo == wrongAnswerOne || wrongAnswerTwo == correctAnswer)
             wrongAnswerTwo = correctAnswer + generateOffset(correctAnswer);
@@ -178,10 +151,10 @@ public class QuizActivity extends AppCompatActivity {
 
 
         //make some strings representing the answers in the appropriate base
-        String correctAnswerInBaseString = BaseToDigit(correctAnswer, to_base);
-        String wrongAnswerOneString = BaseToDigit(wrongAnswerOne, to_base);
-        String wrongAnswerTwoString = BaseToDigit(wrongAnswerTwo,to_base);
-        String wrongAnswerThreeString = BaseToDigit(wrongAnswerThree, to_base);
+        correctAnswerInBaseString = BaseToDigit(correctAnswer, to_base);
+        wrongAnswerOneString = BaseToDigit(wrongAnswerOne, to_base);
+        wrongAnswerTwoString = BaseToDigit(wrongAnswerTwo,to_base);
+        wrongAnswerThreeString = BaseToDigit(wrongAnswerThree, to_base);
 
         if(correctButtonNum == 1){
             QuizActivity.this.answerOne.setText(correctAnswerInBaseString);
@@ -204,6 +177,135 @@ public class QuizActivity extends AppCompatActivity {
             QuizActivity.this.answerThree.setText(wrongAnswerThreeString);
             QuizActivity.this.answerFour.setText(correctAnswerInBaseString);
         }
+    }
+
+
+    private Button genQuestionButton;
+    private TextView scoreView;
+    private TextView inNumberTextView;
+    private Button answerOne;
+    private Button answerTwo;
+    private Button answerThree;
+    private Button answerFour;
+
+
+    int correctButtonNum = ThreadLocalRandom.current().nextInt(1,4);
+    int correctAnswer = ThreadLocalRandom.current().nextInt(1, 50);
+
+    int wrongAnswerOne = correctAnswer + generateOffset(correctAnswer);
+    int wrongAnswerTwo = correctAnswer + generateOffset(correctAnswer);
+    int wrongAnswerThree = correctAnswer + generateOffset(correctAnswer);
+
+    public String correctAnswerString;
+    public String correctAnswerInBaseString;
+    public String wrongAnswerOneString;
+    public String wrongAnswerTwoString;
+    public String wrongAnswerThreeString;
+
+    int from_base;
+    int to_base;
+
+    int score = 0;
+    String scoreString = "Score: " + Integer.toString(score);
+
+    boolean answerSelected = false;
+
+    ArrayList<Integer> from_bases = new ArrayList<Integer>(0);
+    ArrayList<Integer> to_bases = new ArrayList<Integer>(0);
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        start = System.currentTimeMillis();
+
+    }
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_quiz);
+
+        //hard coded conversion values, later these will be brought in by an intent from
+        //the mode select view.  They may later be arrays so that users can practice different
+        //conversions in the same game
+        from_base = 0;
+        to_base = 0;
+
+        //setup the conversion values
+        final Intent intent = getIntent();
+        from_bases = intent.getIntegerArrayListExtra("left_values");
+        to_bases = intent.getIntegerArrayListExtra("right_values");
+
+        genQuestionButton = findViewById(R.id.generate_question_button);
+        scoreView = findViewById(R.id.score_text_view);
+        inNumberTextView = findViewById(R.id.toConvert);
+        answerOne = findViewById(R.id.answerOne);
+        answerTwo = findViewById(R.id.answerTwo);
+        answerThree = findViewById(R.id.answerThree);
+        answerFour = findViewById(R.id.answerFour);
+
+
+
+
+//        String str1;
+//        String str2;
+//        if (from_base == 10)
+//            str1 = "Decimal";
+//        else
+//            str1 = Integer.toString(from_base);
+//
+//        if (to_base == 2)
+//            str2 = "Binary";
+//        else
+//            str2 = Integer.toString(to_base);
+//
+//
+//        String generateQuestionString = str1 + "->" + str2;
+//
+//        QuizActivity.this.genQuestionButton.setText(generateQuestionString);
+
+        generateQuestion(from_bases, to_bases);
+
+//        //setup the number that the user is asked to convert
+//        correctAnswerString = "Convert: " + Integer.toString(correctAnswer);
+//        QuizActivity.this.inNumberTextView.setText(correctAnswerString);
+
+        QuizActivity.this.scoreView.setText(scoreString);
+
+//        while (wrongAnswerTwo == wrongAnswerOne || wrongAnswerTwo == correctAnswer)
+//            wrongAnswerTwo = correctAnswer + generateOffset(correctAnswer);
+//        while (wrongAnswerThree == wrongAnswerOne || wrongAnswerThree == wrongAnswerTwo || wrongAnswerThree == correctAnswer)
+//            wrongAnswerThree = correctAnswer + generateOffset(correctAnswer);
+//
+//
+//        //make some strings representing the answers in the appropriate base
+//        correctAnswerInBaseString = BaseToDigit(correctAnswer, to_base);
+//        wrongAnswerOneString = BaseToDigit(wrongAnswerOne, to_base);
+//        wrongAnswerTwoString = BaseToDigit(wrongAnswerTwo,to_base);
+//        wrongAnswerThreeString = BaseToDigit(wrongAnswerThree, to_base);
+//
+//        if(correctButtonNum == 1){
+//            QuizActivity.this.answerOne.setText(correctAnswerInBaseString);
+//            QuizActivity.this.answerTwo.setText(wrongAnswerOneString);
+//            QuizActivity.this.answerThree.setText(wrongAnswerTwoString);
+//            QuizActivity.this.answerFour.setText(wrongAnswerThreeString);
+//        } else if (correctButtonNum == 2){
+//            QuizActivity.this.answerOne.setText(wrongAnswerOneString);
+//            QuizActivity.this.answerTwo.setText(correctAnswerInBaseString);
+//            QuizActivity.this.answerThree.setText(wrongAnswerTwoString);
+//            QuizActivity.this.answerFour.setText(wrongAnswerThreeString);
+//        } else if (correctButtonNum == 3){
+//            QuizActivity.this.answerOne.setText(wrongAnswerOneString);
+//            QuizActivity.this.answerTwo.setText(wrongAnswerTwoString);
+//            QuizActivity.this.answerThree.setText(correctAnswerInBaseString);
+//            QuizActivity.this.answerFour.setText(wrongAnswerThreeString);
+//        } else if (correctButtonNum == 4){
+//            QuizActivity.this.answerOne.setText(wrongAnswerOneString);
+//            QuizActivity.this.answerTwo.setText(wrongAnswerTwoString);
+//            QuizActivity.this.answerThree.setText(wrongAnswerThreeString);
+//            QuizActivity.this.answerFour.setText(correctAnswerInBaseString);
+//        }
 
 
         answerOne.setOnClickListener(new View.OnClickListener() {
@@ -310,49 +412,52 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 answerSelected = false;
-                correctAnswer = ThreadLocalRandom.current().nextInt(2, 10);
-                String correctAnswerString = "Convert: " + Integer.toString(correctAnswer);
-                QuizActivity.this.inNumberTextView.setText(correctAnswerString);
+                //correctAnswer = ThreadLocalRandom.current().nextInt(2, 50);
 
-                correctButtonNum = ThreadLocalRandom.current().nextInt(1,4);
+                generateQuestion(from_bases, to_bases);
 
-                wrongAnswerOne = correctAnswer + generateOffset(correctAnswer);
-                wrongAnswerTwo = correctAnswer + generateOffset(correctAnswer);
-                wrongAnswerThree = correctAnswer + generateOffset(correctAnswer);
-
-                //handle identical answers
-                while (wrongAnswerTwo == wrongAnswerOne || wrongAnswerTwo == correctAnswer)
-                    wrongAnswerTwo = correctAnswer + generateOffset(correctAnswer);
-                while (wrongAnswerThree == wrongAnswerOne || wrongAnswerThree == wrongAnswerTwo || wrongAnswerThree == correctAnswer)
-                    wrongAnswerThree = correctAnswer + generateOffset(correctAnswer);
-
-
-                String correctAnswerInBaseString = BaseToDigit(correctAnswer, to_base);
-                String wrongAnswerOneString = BaseToDigit(wrongAnswerOne, to_base);
-                String wrongAnswerTwoString = BaseToDigit(wrongAnswerTwo,to_base);
-                String wrongAnswerThreeString = BaseToDigit(wrongAnswerThree, to_base);
-
-                if(correctButtonNum == 1){
-                    QuizActivity.this.answerOne.setText(correctAnswerInBaseString);
-                    QuizActivity.this.answerTwo.setText(wrongAnswerOneString);
-                    QuizActivity.this.answerThree.setText(wrongAnswerTwoString);
-                    QuizActivity.this.answerFour.setText(wrongAnswerThreeString);
-                } else if (correctButtonNum == 2){
-                    QuizActivity.this.answerOne.setText(wrongAnswerOneString);
-                    QuizActivity.this.answerTwo.setText(correctAnswerInBaseString);
-                    QuizActivity.this.answerThree.setText(wrongAnswerTwoString);
-                    QuizActivity.this.answerFour.setText(wrongAnswerThreeString);
-                } else if (correctButtonNum == 3){
-                    QuizActivity.this.answerOne.setText(wrongAnswerOneString);
-                    QuizActivity.this.answerTwo.setText(wrongAnswerTwoString);
-                    QuizActivity.this.answerThree.setText(correctAnswerInBaseString);
-                    QuizActivity.this.answerFour.setText(wrongAnswerThreeString);
-                } else if (correctButtonNum == 4){
-                    QuizActivity.this.answerOne.setText(wrongAnswerOneString);
-                    QuizActivity.this.answerTwo.setText(wrongAnswerTwoString);
-                    QuizActivity.this.answerThree.setText(wrongAnswerThreeString);
-                    QuizActivity.this.answerFour.setText(correctAnswerInBaseString);
-                }
+//                String correctAnswerString = "Convert: " + Integer.toString(correctAnswer);
+//                QuizActivity.this.inNumberTextView.setText(correctAnswerString);
+//
+//                correctButtonNum = ThreadLocalRandom.current().nextInt(1,4);
+//
+//                wrongAnswerOne = correctAnswer + generateOffset(correctAnswer);
+//                wrongAnswerTwo = correctAnswer + generateOffset(correctAnswer);
+//                wrongAnswerThree = correctAnswer + generateOffset(correctAnswer);
+//
+//                //handle identical answers
+//                while (wrongAnswerTwo == wrongAnswerOne || wrongAnswerTwo == correctAnswer)
+//                    wrongAnswerTwo = correctAnswer + generateOffset(correctAnswer);
+//                while (wrongAnswerThree == wrongAnswerOne || wrongAnswerThree == wrongAnswerTwo || wrongAnswerThree == correctAnswer)
+//                    wrongAnswerThree = correctAnswer + generateOffset(correctAnswer);
+//
+//
+//                correctAnswerInBaseString = BaseToDigit(correctAnswer, to_base);
+//                wrongAnswerOneString = BaseToDigit(wrongAnswerOne, to_base);
+//                wrongAnswerTwoString = BaseToDigit(wrongAnswerTwo,to_base);
+//                wrongAnswerThreeString = BaseToDigit(wrongAnswerThree, to_base);
+//
+//                if(correctButtonNum == 1){
+//                    QuizActivity.this.answerOne.setText(correctAnswerInBaseString);
+//                    QuizActivity.this.answerTwo.setText(wrongAnswerOneString);
+//                    QuizActivity.this.answerThree.setText(wrongAnswerTwoString);
+//                    QuizActivity.this.answerFour.setText(wrongAnswerThreeString);
+//                } else if (correctButtonNum == 2){
+//                    QuizActivity.this.answerOne.setText(wrongAnswerOneString);
+//                    QuizActivity.this.answerTwo.setText(correctAnswerInBaseString);
+//                    QuizActivity.this.answerThree.setText(wrongAnswerTwoString);
+//                    QuizActivity.this.answerFour.setText(wrongAnswerThreeString);
+//                } else if (correctButtonNum == 3){
+//                    QuizActivity.this.answerOne.setText(wrongAnswerOneString);
+//                    QuizActivity.this.answerTwo.setText(wrongAnswerTwoString);
+//                    QuizActivity.this.answerThree.setText(correctAnswerInBaseString);
+//                    QuizActivity.this.answerFour.setText(wrongAnswerThreeString);
+//                } else if (correctButtonNum == 4){
+//                    QuizActivity.this.answerOne.setText(wrongAnswerOneString);
+//                    QuizActivity.this.answerTwo.setText(wrongAnswerTwoString);
+//                    QuizActivity.this.answerThree.setText(wrongAnswerThreeString);
+//                    QuizActivity.this.answerFour.setText(correctAnswerInBaseString);
+//                }
 
                 answerOne.setBackgroundColor(Color.LTGRAY);
                 answerTwo.setBackgroundColor(Color.LTGRAY);
