@@ -10,7 +10,11 @@
     <CheckBox
         android:id="@+id/left_decimal"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content" />
+        android:layout_width="wrap_content" android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="150dp"
+        android:text="@string/conversion_button_decimal" />
 
     <Button
         android:id="@+id/Mode"
@@ -24,16 +28,8 @@
         android:layout_marginEnd="90dp"
         android:text="Endless" />
 
-    <TextView
-        android:id="@+id/Game"
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="150dp"
-        android:text="@string/conversion_button_decimal" />
+
 
     <CheckBox
         android:id="@+id/right_decimal"

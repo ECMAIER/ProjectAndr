@@ -95,15 +95,18 @@ public class GameActivity extends AppCompatActivity {
         });
 
     }
-
+/*
     @Override
     protected void onStart() {
         super.onStart();
-        setContentView(R.layout.activity_timed);
+        //changed
+        //setContentView(R.layout.activity_timed);
         start = System.currentTimeMillis();
+        setContentView(R.layout.activity_game);
 
     }
 //2.1845334
+
     @Override
     protected void onStop() {
         super.onStop();
@@ -113,5 +116,6 @@ public class GameActivity extends AppCompatActivity {
         //editor.putInt(getString(R.string.total_time_played), 0 ); //to reset
         editor.apply();
     }
+    */
 }
 
