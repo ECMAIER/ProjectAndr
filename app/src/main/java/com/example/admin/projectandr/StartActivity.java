@@ -12,12 +12,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class StartActivity extends AppCompatActivity
 {
-    private Button Game;
-    private Button Coop;
-    private Button Time;
+    //Buttons declared to be used
+    private ImageButton Game;
+    private ImageButton Coop;
+    private ImageButton Time;
+    private ImageButton Endless;
+    private ImageButton Survivor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +29,14 @@ public class StartActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
+        //Finds button by id on activity_start.xml
+        ImageButton Game = findViewById(R.id.Game);
+        ImageButton Coop = findViewById(R.id.COOP);
+        ImageButton Time = findViewById(R.id.time);
+        ImageButton Endless = findViewById(R.id.endless);
+        ImageButton Survivor = findViewById(R.id.survivor);
 
-        Button Game = findViewById(R.id.Game);
-        Button Coop = findViewById(R.id.COOP);
-        Button Time = findViewById(R.id.time);
-
+        //All buttons start at StartActivity and goes to said Activity
         Game.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,6 +58,22 @@ public class StartActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent3 = new Intent(StartActivity.this, TimedActivity.class);
                 startActivity(intent3);
+            }
+        });
+
+        Endless.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent4 = new Intent(StartActivity.this, EndlessActivity.class);
+                startActivity(intent4);
+            }
+        });
+
+        Survivor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent5 = new Intent(StartActivity.this, SurvivorActivity.class);
+                startActivity(intent5);
             }
         });
     }
