@@ -5,20 +5,53 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_Game"
-            android:icon="@drawable/ic_menu_send"
+            android:id="@+id/nav_Start"
+            android:icon="@drawable/ic_play_circle_outline_black_24dp"
             android:title="Start" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
+            android:id="@+id/nav_Stats"
+            android:icon="@drawable/ic_format_list_bulleted_black_24dp"
             android:title="Stats" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:id="@+id/nav_Tutorial"
+            android:icon="@drawable/ic_question_answer_black_24dp"
             android:title="Tutorial" />
 
     </group>
 
+    <item android:title="From Start Menu">
 
+        <menu>
+            <item
+                android:id="@+id/nav_Game"
+                android:title="Game"
+                android:icon="@drawable/ic_gamepad_black_24dp"
+                />
 
+            <item
+                android:id="@+id/nav_COOP"
+                android:title="Coop Game"
+                android:icon="@drawable/ic_group_black_24dp"
+                />
+
+            <item
+                android:id="@+id/nav_Time"
+                android:title="Time Game"
+                android:icon="@drawable/ic_access_time_black_24dp"
+                />
+
+            <item
+                android:id="@+id/nav_endless"
+                android:title="Endless Game"
+                android:icon="@drawable/ic_all_inclusive_black_24dp"
+                />
+
+            <item
+                android:id="@+id/nav_Survivor"
+                android:title="Survivor Game"
+                android:icon="@drawable/ic_highlight_black_24dp"
+                />
+
+        </menu>
+    </item>
 </menu>

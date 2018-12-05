@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,16 +7,80 @@
     android:layout_height="match_parent"
     tools:context=".TutorialActivity">
 
+    <TextView
+        android:id="@+id/tutorialintro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="As you go through your education in Computer Science or
+Electrical Engineering, you may be tasked with a simple
+conversion from binary numbers to decimal numbers, decimal
+numbers to hexadecimal numbers or hexadecimal numbers to
+binary numbers. This task should not be hard. Just below are
+example videos that have been hand picked to make any
+conversion simple to understand. Yes there are easy
+converters online but what is the fun in that. Following the
+video tutorials please feel free to press the back button to
+navigate to the main page where the start button will take to
+you to a few challenges we have made to test your ability in
+these conversions."
+        android:textAlignment="center" />
 
-
-
-<TextView
-        android:id="@+id/tutorial"
+    <Button
+        android:id="@+id/binarydecimal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="102dp"
-        android:text="This is the tutorial activity" />
+        android:layout_marginTop="209dp"
+        android:text="Binary to Decimal conversion" />
+
+    <Button
+        android:id="@+id/binhex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="207dp"
+        android:text="Binary to hexadecimal conversion" />
+
+    <Button
+        android:id="@+id/hexbin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="160dp"
+        android:text="Hexidecimal to Binary Conversion" />
+
+    <Button
+        android:id="@+id/hexdec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/binhex"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="-4dp"
+
+        android:layout_marginBottom="112dp"
+        android:text="Hexadecimal to Decimal Conversion" />
+
+    <Button
+        android:id="@+id/decbin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hexdec"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-112dp"
+        android:text="Decimal to Binary Conversion" />
+
+    <Button
+        android:id="@+id/dechex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="14dp"
+        android:text="Decimal to Hexadecimal Conversion" />
+
 
 </RelativeLayout>

@@ -13,4 +13,6 @@
     <string name="time_game_button">Timed Game</string>
     <string name="Coop_button">Coop Game</string>
     <string name="title_activity_game">GameActivity</string>
+    <string name="endless_button">Endless Game</string>
+    <string name="survivor_button">Survivor Game</string>
 </resources>
