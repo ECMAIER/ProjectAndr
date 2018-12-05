@@ -14,6 +14,8 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import java.util.ArrayList;
+
 public class StartActivity extends AppCompatActivity
 {
     //Buttons declared to be used
@@ -56,7 +58,17 @@ public class StartActivity extends AppCompatActivity
         Time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ArrayList<Integer> left = new ArrayList<Integer>(0);
+                ArrayList<Integer> right = new ArrayList<Integer>(0);
+                left.add(2);
+                left.add(10);
+                left.add(16);
+                right.add(2);
+                right.add(10);
+                right.add(16);
                 Intent intent3 = new Intent(StartActivity.this, TimedActivity.class);
+                intent3.putIntegerArrayListExtra("left_values", left);
+                intent3.putIntegerArrayListExtra("right_values", right);
                 startActivity(intent3);
             }
         });
