@@ -6,42 +6,77 @@
     android:layout_height="match_parent"
     tools:context=".StartActivity">
 
-    <Button
+    <ImageButton
         android:id="@+id/Game"
-        android:layout_width="202dp"
+        android:layout_width="304dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="90dp"
-        android:layout_marginTop="89dp"
-        android:layout_marginEnd="90dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="40dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/game"
         android:text="@string/game_button" />
 
-    <Button
+    <ImageButton
         android:id="@+id/COOP"
-        android:layout_width="203dp"
+        android:layout_width="303dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="90dp"
-        android:layout_marginTop="201dp"
-        android:layout_marginEnd="90dp"
-        android:text="@string/Coop_button"
-        />
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="40dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/coop"
+        android:text="@string/Coop_button" />
 
-    <Button
+    <ImageButton
         android:id="@+id/time"
-        android:layout_width="142dp"
+        android:layout_width="301dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="90dp"
-        android:layout_marginEnd="90dp"
-        android:layout_marginBottom="147dp"
-        android:text="@string/time_game_button"/>
+        android:layout_marginStart="43dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="247dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/timebutton"
+        android:text="@string/time_game_button" />
+
+    <ImageButton
+        android:id="@+id/endless"
+        android:layout_width="302dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="41dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginBottom="153dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/endlessbutton"
+        android:text="@string/endless_button" />
+
+    <ImageButton
+        android:id="@+id/survivor"
+        android:layout_width="299dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="44dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginBottom="60dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/survivalbutton"
+        android:text="@string/survivor_button" />
+
+
 
 
 

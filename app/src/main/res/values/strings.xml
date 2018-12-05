@@ -13,7 +13,6 @@
     <string name="time_game_button">Timed Game</string>
     <string name="Coop_button">Coop Game</string>
     <string name="title_activity_game">GameActivity</string>
-
     <string name="conversion_button_decimal">Decimal</string>
     <string name="conversion_button_binary">Binary</string>
     <string name="conversion_button_hex">Hexadecimal</string>
@@ -35,5 +34,7 @@
     <string name="survivor">Survivor</string>
     <string name="total_time_played_string_playtime">Total Time Played: @string/playtime</string>
 
+    <string name="endless_button">Endless Game</string>
+    <string name="survivor_button">Survivor Game</string>
 
 </resources>
