@@ -42,6 +42,9 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        //
+
+
 
         //Get instances of CheckBoxes and the button from activity_game.xml
         left_binary = findViewById(R.id.left_binary);
@@ -57,6 +60,8 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                left.clear();
+                right.clear();
                 if (left_decimal.isChecked()){
                     left.add(10);
                 }
