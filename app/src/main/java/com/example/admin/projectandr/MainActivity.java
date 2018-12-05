@@ -1,6 +1,7 @@
 package com.example.admin.projectandr;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity
     private ImageButton Tutorial;
 
 
+    public static SharedPreferences sharedPref; //global var for all activities
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        sharedPref = getSharedPreferences(getString(R.string.total_time_played) ,MODE_PRIVATE);
 
 
         //Buttons set to certain ids,

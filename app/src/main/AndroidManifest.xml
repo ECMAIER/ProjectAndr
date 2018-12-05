@@ -24,9 +24,10 @@
         <activity android:name=".TimedActivity" />
         <activity android:name=".StatsActivity" />
         <activity android:name=".TutorialActivity" />
-        <activity android:name=".EndlessActivity" />
-        <activity android:name=".SurvivorActivity" />
-        <activity android:name=".GameActivity"></activity>
+
+        <activity android:name=".GameActivity" />
+        <activity android:name=".QuizActivity"></activity>
+
     </application>
 
 </manifest>
